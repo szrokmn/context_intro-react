@@ -8,10 +8,10 @@ import PersonDetail from "./pages/PersonDetail";
 import Login from "./pages/Login";
 import { LoginContext } from "./context/LoginContext";
 import { useState } from "react"
-import Private from "./pages/PrivateRouter";
+import PrivateRouter from "./pages/PrivateRouter";
 
 function App() {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState(""); 
 
   return (
     <LoginContext.Provider value={{ user, setUser }}>
@@ -22,9 +22,11 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="login" element={<Login />} />
 
-          <Route path="people" element={<Private />} />
-          <Route path="people/:id" element={<PersonDetail />} />
-
+          <Route path="people" element={<PrivateRouter />} >
+            <Route path="" element={<People />} />
+            <Route path=":id" element={<PersonDetail />} />
+          </Route>
+        
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         <Footer />
